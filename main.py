@@ -91,3 +91,27 @@ def search_gpts(query: str):
 @app.get("/list")
 def read_list(b: str = None, a: str = None):
     return {"b": b, "a": a}
+
+
+class ollamaSearchReq(BaseModel):
+    m: str;
+    q: str;
+    s: bool;
+
+# ollama 模型api请求
+@app.post("/ollama/api/generate")
+def ollama_model_api(req: ollamaSearchReq, authorization: str = Header(None)):
+    """
+    调用ollama模型api
+    :param model: 模型名称
+    :param prompt: 输入的prompt
+    :return: 返回的结果
+    """
+    url = "http://127.0.0.1:11434/api/generate"
+    data = {
+        "model": req.m,
+        "prompt": req.q,
+        "stream": req.s
+    }
+    response = requests.post(url, json=data)
+    return response.text
