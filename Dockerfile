@@ -13,5 +13,5 @@ RUN pip install fastapi uvicorn pydantic requests typing
 # 暴露容器的端口
 EXPOSE 8000
 
-# 启动 FastAPI 应用
-CMD ["uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8000"]
+# 指定运行uvicorn命令启动应用
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

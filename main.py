@@ -100,7 +100,7 @@ class ollamaSearchReq(BaseModel):
 
 # ollama 模型api请求
 @app.post("/ollama/api/generate")
-def ollama_model_api(req: ollamaSearchReq, authorization: str = Header(None)):
+async def ollama_model_api(req: ollamaSearchReq, authorization: str = Header(None)):
     """
     调用ollama模型api
     :param model: 模型名称
@@ -113,5 +113,5 @@ def ollama_model_api(req: ollamaSearchReq, authorization: str = Header(None)):
         "prompt": req.q,
         "stream": req.s
     }
-    response = requests.post(url, json=data)
+    response = await requests.post(url, json=data)
     return response.text
