@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # 安装项目依赖
-RUN pip install -r requirements.txt
+RUN pip install fastapi uvicorn pydantic requests typing
 
 # 暴露容器的端口
 EXPOSE 8000
