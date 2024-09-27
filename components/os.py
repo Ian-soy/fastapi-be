@@ -1,0 +1,6 @@
+import os
+ 
+# 添加新的环境变量
+os.environ['SUPABASE_URL'] = 'https://zfwxxuawqlcmnsbdgksq.supabase.co'
+os.environ['SUPABASE_KEY'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpmd3h4dWF3cWxjbW5zYmRna3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU1NDg2MTIsImV4cCI6MjA0MTEyNDYxMn0.TQqyWfV0KMxYPZlkjwRubtdctJvCBHzuovr8lLZ5R5A'
+os.environ['SUPABASE_SECRET_KEY'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpmd3h4dWF3cWxjbW5zYmRna3NxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyNTU0ODYxMiwiZXhwIjoyMDQxMTI0NjEyfQ.QCAv0sxVOYJuEkdjPEEuZK2N9tsrQjuOqeidctA7faw'
