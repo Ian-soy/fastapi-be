@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from apis.audio import audio_router
-from apis.gpts import gpts_router
-from apis.ollama import ollama_router
-from apis.test import test_router
+
 from components.db import init_db
 from components.log import init_log, log
 from components.env import init_env
+from apis.gpts import gpts_router
+from apis.ollama import ollama_router
+from apis.test import test_router
+from apis.audio import audio_router
 
 # 示例化
 app = FastAPI()
@@ -41,3 +42,6 @@ async def startup():
     log.info("app start")
 
 
+@app.on_event("shutdown")
+async def shutdown():
+    log.info("app shutdown")

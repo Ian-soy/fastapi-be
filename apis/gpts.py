@@ -7,15 +7,6 @@ import os
 
 gpts_router = APIRouter()
 
-# headers
-headers = {
-    'Authorization': f'Bearer {os.getenv("KOUZI_API_KEY")}',
-    'Content-Type': 'application/json',
-    'Accept': '*/*',
-    'Host': 'api.coze.cn',
-    'Connection': 'keep-alive'
-}
-
 # 参数验证
 class SearchReq(BaseModel):
     question: str
@@ -77,6 +68,15 @@ def search_gpts(query: str):
       "user": "12345",
       "query": query,
       "stream": False
+    }
+
+    # headers
+    headers = {
+        'Authorization': f"Bearer  {os.getenv('KOUZI_API_KEY')}",
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Host': 'api.coze.cn',
+        'Connection': 'keep-alive'
     }
     # 将请求体转换为 JSON 格式的字符串
     json_data = json.dumps(data)

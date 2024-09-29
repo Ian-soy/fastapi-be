@@ -1,9 +1,18 @@
-from pony.orm import Database, set_sql_debug
+from pony.orm import Database, set_sql_debug, Required
 import os
 from components.log import log
 from urllib.parse import urlparse
 
 db = Database()
+
+class Audio(db.Entity):
+    title = Required(str)
+    url = Required(str)
+    uuid = Required(str)
+    created_at = Required(str)
+    update_at = Required(str)
+    description = Required(str)
+
 
 def init_db():
     """
@@ -24,17 +33,18 @@ def init_db():
     url = urlparse(database_url)
 
     db.bind(
-        provider=url.scheme,
+        provider=str(url.scheme),
         host=url.hostname,
         user=url.username,
         password=url.password,
         database=url.path[1:]
     )
+    
     db.generate_mapping(create_tables=True)
 
     set_sql_debug(True)
 
-    print("init db ok")
+    log.info("init db ok")
 
 
 
