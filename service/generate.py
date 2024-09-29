@@ -65,9 +65,9 @@ async def generate_audio(des, m="llama3-1-405b", title=''):
 
 async def save_to_bucket(description, title):
 
+  # 读取 MP3 文件内容
   with open(random_uuid + '.mp3', 'rb') as file:
     mp3_content = file.read()
-
 
   bucket_name = 'resource-online'
   file_name = "file/" + current_timestamp + '/' + random_uuid + '.mp3'
@@ -78,5 +78,8 @@ async def save_to_bucket(description, title):
   })
 
   insert_audio(title, description, '/' + file_name, random_uuid, current_time, current_time)
+  
+  # 上传完成之后删除本地文件
+  os.remove(random_uuid + '.mp3')
   
   return response;
