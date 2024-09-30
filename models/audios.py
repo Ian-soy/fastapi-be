@@ -4,8 +4,8 @@ from components.db import db, Audio
 
 # 增加数据
 @db_session
-def insert_audio(title, description, url, uuid, created_at, update_at):
-    new_audio = Audio(title=title, description=description, url=url, uuid=uuid, created_at=created_at, update_at=update_at)
+def insert_audio(title, description, url, img_url,  uuid, created_at, update_at):
+    new_audio = Audio(title=title, description=description, url=url, img_url=img_url, uuid=uuid, created_at=created_at, update_at=update_at)
     return;
 
 

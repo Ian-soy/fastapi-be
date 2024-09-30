@@ -1,13 +1,13 @@
 from models.audios import insert_audio
 from components.spb import storage_client
 from components.log import log
+from service.generate_img import generate_image
 import time
 import base64
 import openai
 import os
 import uuid
 import datetime
-
 
 current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S');
 current_timestamp = str(int(datetime.datetime.now().timestamp()) * 1000 )
@@ -64,6 +64,8 @@ async def generate_audio(des, m="llama3-1-405b", title=''):
   
 # 上传到bucket、数据库、并删除本地文件
 async def save_to_bucket(description, title):
+  # 背景图片地址
+  img_url = await get_image(description)
 
   # 读取 MP3 文件内容
   with open(random_uuid + '.mp3', 'rb') as file:
@@ -72,14 +74,21 @@ async def save_to_bucket(description, title):
   bucket_name = 'resource-online'
   file_name = "file/" + current_timestamp + '/' + random_uuid + '.mp3'
 
-
   response = storage_client().from_(bucket_name).upload(file_name, mp3_content, {
     'content-type': 'audio/mpeg',
   })
-
-  insert_audio(title, description, '/' + file_name, random_uuid, current_time, current_time)
+  
+  # 插入数据库
+  insert_audio(title, description, '/' + file_name, img_url, random_uuid, current_time, current_time)
   
   # 上传完成之后删除本地文件
   os.remove(random_uuid + '.mp3')
   
   return response;
+
+
+# 生成图片
+async def get_image(des):
+  url = generate_image(des, random_uuid, current_timestamp)
+  return url
+

@@ -12,6 +12,7 @@ class Audio(db.Entity):
     created_at = Required(str)
     update_at = Required(str)
     description = Required(str)
+    img_url = Required(str)
 
 
 def init_db():

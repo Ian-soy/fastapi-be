@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Header
 from utils.resp import resp_err, resp_ok, resp_data
 from pydantic import BaseModel
-from service.generate import generate_audio
+from service.generate_ad import generate_audio
 
 audio_router = APIRouter()
 
