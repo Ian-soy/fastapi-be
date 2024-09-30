@@ -32,4 +32,7 @@ def generate_image(prompt, uuid, timestamp):
       'content-type': 'image/png',
     })
     
+    # 上传完成之后删除本地文件
+    os.remove(uuid + '.png')
+    
     return file_name
