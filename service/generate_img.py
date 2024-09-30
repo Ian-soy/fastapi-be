@@ -26,7 +26,7 @@ def generate_image(prompt, uuid, timestamp):
       mp3_content = file.read()
 
     bucket_name = 'resource-online'
-    file_name = "file/" + timestamp + '/' + uuid + '.png'
+    file_name = "/file/" + timestamp + '/' + uuid + '.png'
 
     response = storage_client().from_(bucket_name).upload(file_name, mp3_content, {
       'content-type': 'image/png',

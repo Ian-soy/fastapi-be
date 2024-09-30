@@ -14,6 +14,10 @@ current_timestamp = str(int(datetime.datetime.now().timestamp()) * 1000 )
 # 生成一个随机的 UUID
 random_uuid = str(uuid.uuid4())
 
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_STORAGE_URL = os.getenv("SUPABASE_STORAGE_URL")
+prefix_url = SUPABASE_URL + '' + SUPABASE_STORAGE_URL
+
 # 生成音频文件
 async def generate_audio(des, m="llama3-1-405b", title=''):
   client = openai.OpenAI(
@@ -72,14 +76,14 @@ async def save_to_bucket(description, title):
     mp3_content = file.read()
 
   bucket_name = 'resource-online'
-  file_name = "file/" + current_timestamp + '/' + random_uuid + '.mp3'
+  file_name = "/file/" + current_timestamp + '/' + random_uuid + '.mp3'
 
   response = storage_client().from_(bucket_name).upload(file_name, mp3_content, {
     'content-type': 'audio/mpeg',
   })
   
   # 插入数据库
-  insert_audio(title, description, '/' + file_name, img_url, random_uuid, current_time, current_time)
+  insert_audio(title, description, prefix_url + file_name, prefix_url + img_url, random_uuid, current_time, current_time)
   
   # 上传完成之后删除本地文件
   os.remove(random_uuid + '.mp3')
