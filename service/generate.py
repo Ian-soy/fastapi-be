@@ -14,7 +14,7 @@ current_timestamp = str(int(datetime.datetime.now().timestamp()) * 1000 )
 # 生成一个随机的 UUID
 random_uuid = str(uuid.uuid4())
 
-
+# 生成音频文件
 async def generate_audio(des, m="llama3-1-405b", title=''):
   client = openai.OpenAI(
     base_url=f"https://{m}.lepton.run/api/v1/",
@@ -62,7 +62,7 @@ async def generate_audio(des, m="llama3-1-405b", title=''):
 
   return response;
   
-
+# 上传到bucket、数据库、并删除本地文件
 async def save_to_bucket(description, title):
 
   # 读取 MP3 文件内容
