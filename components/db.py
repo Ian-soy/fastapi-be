@@ -1,4 +1,4 @@
-from pony.orm import Database, set_sql_debug, Required
+from pony.orm import Database, set_sql_debug, Required, Optional
 import os
 from components.log import log
 from urllib.parse import urlparse
@@ -13,7 +13,7 @@ class Audio(db.Entity):
     update_at = Required(str)
     description = Required(str)
     img_url = Required(str)
-    status = Required(int)
+    status = Optional(int)
 
 
 def init_db():

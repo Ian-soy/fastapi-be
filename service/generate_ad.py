@@ -14,10 +14,6 @@ current_timestamp = str(int(datetime.datetime.now().timestamp()) * 1000 )
 # 生成一个随机的 UUID
 random_uuid = str(uuid.uuid4())
 
-SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_STORAGE_URL = os.getenv("SUPABASE_STORAGE_URL")
-prefix_url = SUPABASE_URL + '' + SUPABASE_STORAGE_URL
-
 # 生成音频文件
 async def generate_audio(des, m="llama3-1-405b", title=''):
   client = openai.OpenAI(
@@ -68,6 +64,10 @@ async def generate_audio(des, m="llama3-1-405b", title=''):
   
 # 上传到bucket、数据库、并删除本地文件
 async def save_to_bucket(description, title):
+
+  SUPABASE_URL = os.getenv("SUPABASE_URL")
+  SUPABASE_STORAGE_URL = os.getenv("SUPABASE_STORAGE_URL")
+  prefix_url = SUPABASE_URL + '' + SUPABASE_STORAGE_URL
   # 背景图片地址
   img_url = await get_image(description)
 
